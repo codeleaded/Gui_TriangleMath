@@ -16,9 +16,9 @@ char Vec2_Side(Vec2 s,Vec2 t,Vec2 p){
     return dp >= 0.0f;
 }
 char Triangle_Point(Triangle t,Vec2 p){
-    char AB = Vec2_Side(t.p1,t.p2,p);
-    char BC = Vec2_Side(t.p2,t.p3,p);
-    char CA = Vec2_Side(t.p3,t.p1,p);
+    const char AB = Vec2_Side(t.p1,t.p2,p);
+    const char BC = Vec2_Side(t.p2,t.p3,p);
+    const char CA = Vec2_Side(t.p3,t.p1,p);
     return AB==BC && BC==CA;
 }
 
@@ -57,13 +57,12 @@ void Update(AlxWindow* w){
 
     Vec2 m = TransformedView_ScreenWorldPos(&tv,GetMouse());
 
-    char InTri = Triangle_Point(tri,m);
-    //char InTri = Overlap_Triangle_Point(tri,m);
-    Pixel c = InTri ? GREEN : RED;
-
-    Vec2 s1 = TransformedView_WorldScreenPos(&tv,tri.p1);
-    Vec2 s2 = TransformedView_WorldScreenPos(&tv,tri.p2);
-    Vec2 s3 = TransformedView_WorldScreenPos(&tv,tri.p3);
+    const char InTri = Triangle_Point(tri,m);
+    //const char InTri = Overlap_Triangle_Point(tri,m);
+    const Pixel c = InTri ? GREEN : RED;
+    const Vec2 s1 = TransformedView_WorldScreenPos(&tv,tri.p1);
+    const Vec2 s2 = TransformedView_WorldScreenPos(&tv,tri.p2);
+    const Vec2 s3 = TransformedView_WorldScreenPos(&tv,tri.p3);
 	RenderTriangleWire(s1,s2,s3,c,1.0f);
 }
 void Delete(AlxWindow* w){
